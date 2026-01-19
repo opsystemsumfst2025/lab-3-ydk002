@@ -1,0 +1,9 @@
+1. feladat (Fork): A kimenetek sorrendje nem volt determinisztikus. Néha a szülő, néha a gyerek írt ki előbb, mivel az ütemező döntésétől függött, melyik futott le hamarabb.
+
+2. feladat (Zombie): Amikor a szülő nem hívott wait()-et, a ps aux kimeneten láttam a gyerek folyamatot <defunct> (Z) státusszal. A wait() beírása után a zombi eltűnt, mert a szülő átvette a státuszát.
+
+3. feladat (Race Condition): Szinkronizáció nélkül az eredmény sosem érte el a 200 000-et (nálam pl. 120 106 volt). Ez azért történt, mert a counter++ nem atomi művelet, és a folyamatok felülírták egymás eredményét.
+
+4. feladat (Szemafor): A szemaforral védett kritikus szakasz megoldotta a problémát. Az eredmény mindig pontosan 200 000 lett, de a futás kicsit lassabb volt a sok zárolás miatt.
+
+Házi feladat (Ping-Pong): A két szemaforos megoldással a kimenet szigorúan váltakozva (PING-PONG) jelent meg, sosem keveredett a sorrend.
